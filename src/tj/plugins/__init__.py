@@ -1,5 +1,5 @@
-# antioch
-# Copyright (c) 1999-2010 Phil Christensen
+# TJ
+# Copyright (c) 2011 Phil Christensen
 #
 #
 # See LICENSE for details

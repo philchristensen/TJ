@@ -41,5 +41,5 @@ Copyright
 
 All code in this distribution is (C) Phil Christensen.
 
-antioch is made available under the MIT/X Consortium license.
+TJ is made available under the MIT/X Consortium license.
 The included LICENSE file describes this in detail.
