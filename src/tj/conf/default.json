@@ -1,5 +1,9 @@
 {
 	"jid": "fubot@freelancersunion.org/fubot",
 	"secret": "oyk:Cz5/Zo>H3M${",
-	"suppress-deprecation-warnings": true
+	"suppress-deprecation-warnings": true,
+	"active-plugins" : [
+		"tj.plugins.echo",
+		"tj.plugins.tell",
+	]
 }

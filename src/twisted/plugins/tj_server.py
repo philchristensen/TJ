@@ -57,7 +57,7 @@ class botServer(object):
 		xmpp_service.setName("xmpp-client")
 		xmpp_service.setServiceParent(master_service)
 		
-		echobot = xmpp.EchoBotProtocol()
-		echobot.setHandlerParent(xmpp_service)
+		bot = xmpp.BotProtocol()
+		bot.setHandlerParent(xmpp_service)
 		
 		return master_service
