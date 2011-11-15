@@ -40,8 +40,8 @@ class BotProtocol(MessageProtocol):
 		if msg["type"] == 'chat' and hasattr(msg, "body"):
 			print >>sys.stderr, str(msg.__dict__)
 			plugin('heard', self, msg)
-		else:
-			print >>sys.stderr, "UNKNOWN MESSAGE: %s" % msg.__dict__
+		# else:
+		# 	print >>sys.stderr, "UNKNOWN MESSAGE: %s" % msg.__dict__
 
 class MUCBotClient(muc.MUCClient):
 	def __init__(self, server, room, nick):
@@ -65,3 +65,11 @@ class MUCBotClient(muc.MUCClient):
 		# 	config_form = yield self.getConfigureForm(self.room_jid.userhost())
 		# 	# set config default
 		# 	config_result = yield self.configure(self.room_jid.userhost())
+	
+	def groupChatReceived(self, msg):
+		msg = msg.toElement()
+		if msg["type"] == 'groupchat' and hasattr(msg, "body"):
+			print >>sys.stderr, str(msg.__dict__)
+			plugin('heard', self, msg)
+		# else:
+		# 	print >>sys.stderr, "UNKNOWN GROUP MESSAGE: %s" % msg.__dict__

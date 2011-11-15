@@ -30,14 +30,14 @@ def createReply(msg, content):
 	reply = domish.Element((None, "message"))
 	reply["to"] = msg["from"]
 	reply["from"] = msg["to"]
-	reply["type"] = 'chat'
+	reply["type"] = msg["type"]
 	reply.addElement("body", content=content)
 	return reply
 
 class PugMe(object):
 	classProvides(plugin.IPlugin, IBotPlugin)
 	
-	name = u'echo'
+	name = u'pugme'
 	
 	PUGME = re.compile(r'pug me')
 	PUGBOMB = re.compile(r'pug bomb (\d+)?')
