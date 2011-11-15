@@ -14,6 +14,8 @@ from zope import interface
 
 from twisted import plugin
 
+from tj import conf
+
 __path__ = [os.path.abspath(os.path.join(x, 'tj', 'plugins')) for x in sys.path]
 
 __all__ = []
@@ -21,16 +23,18 @@ __all__ = []
 def iterate():
 	import tj.plugins
 	for module in plugin.getPlugins(IBotPlugin, tj.plugins):
+		if(module.__module__ not in conf.get('active-plugins')):
+			continue
 		m = module()
-		print m
 		yield m
 
 def get(name):
 	import tj.plugins
 	for module in plugin.getPlugins(IBotPlugin, tj.plugins):
-		if(module.name == name):
+		if(module.__module__ not in conf.get('active-plugins')):
+			continue
+		if(name in (module.name, module.__module__)):
 			m = module()
-			print m
 			return m
 	return None
 

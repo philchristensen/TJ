@@ -27,5 +27,3 @@ class EchoPlugin(object):
 		reply["type"] = 'chat'
 		reply.addElement("body", content="echo: " + str(msg.body))
 		protocol.send(reply)
-	
-	
