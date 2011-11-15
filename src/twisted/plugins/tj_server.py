@@ -52,12 +52,16 @@ class botServer(object):
 
 		master_service = service.MultiService()
 		
-		xmpp_service = XMPPClient(jid.internJID(conf.get('jid')), conf.get('secret'))
-		# xmpp_service.logTraffic = False
-		xmpp_service.setName("xmpp-client")
-		xmpp_service.setServiceParent(master_service)
+		xmpp_client = XMPPClient(jid.internJID(conf.get('jid')), conf.get('secret'))
+		xmpp_client.setName("xmpp-client")
+		xmpp_client.setServiceParent(master_service)
 		
 		bot = xmpp.BotProtocol()
-		bot.setHandlerParent(xmpp_service)
+		bot.setHandlerParent(xmpp_client)
+		
+		for room in conf.get('join-rooms'):
+			print 'creating room client for %s' % room
+			muc_client = xmpp.MUCBotClient(*room)
+			muc_client.setHandlerParent(xmpp_client)
 		
 		return master_service

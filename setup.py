@@ -52,7 +52,8 @@ def autosetup():
 		
 		install_requires = ['%s%s' % x for x in dict(
 			twisted				= ">=10.1.0",
-			wokkel				= "==0.6.3",
+			#wokkel				= "==0.6.3",
+			python_dateutil		= "==1.5",
 		).items()],
 		
 		# metadata for upload to PyPI
