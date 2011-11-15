@@ -9,6 +9,6 @@
 		"tj.plugins.echo"
 	],
 	"join-rooms" : [
-		["conference.freelancersunion.org", "it", "fubot"]
+		["conference.freelancersunion.org", "tjbot", "fubot"]
 	]
 }

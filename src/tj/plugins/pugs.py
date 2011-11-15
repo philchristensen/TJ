@@ -26,14 +26,6 @@ from twisted.web.client import getPage
 
 import simplejson
 
-def createReply(msg, content):
-	reply = domish.Element((None, "message"))
-	reply["to"] = msg["from"]
-	reply["from"] = msg["to"]
-	reply["type"] = msg["type"]
-	reply.addElement("body", content=content)
-	return reply
-
 class PugMe(object):
 	classProvides(plugin.IPlugin, IBotPlugin)
 	
@@ -49,8 +41,7 @@ class PugMe(object):
 		if(self.PUGME.search(str(msg.body))):
 			data = yield getPage('http://pugme.herokuapp.com/random')
 			json = simplejson.loads(data)
-			reply = createReply(msg, json['pug'])
-			protocol.send(reply)
+			protocol.groupChat(protocol.room_jid, json['pug'])
 			return
 		
 		pug_bomb = self.PUGBOMB.search(str(msg.body))
@@ -58,6 +49,5 @@ class PugMe(object):
 			data = yield getPage('http://pugme.herokuapp.com/bomb?count=%s' % pug_bomb.group(1))
 			json = simplejson.loads(data)
 			for pug in json['pugs']:
-				reply = createReply(msg, pug)
-				protocol.send(reply)
+				protocol.groupChat(protocol.room_jid, pug)
 			return

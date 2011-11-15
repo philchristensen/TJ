@@ -39,7 +39,7 @@ class BotProtocol(MessageProtocol):
 	def onMessage(self, msg):
 		if msg["type"] == 'chat' and hasattr(msg, "body"):
 			print >>sys.stderr, str(msg.__dict__)
-			plugin('heard', self, msg)
+			plugin('message', self, msg)
 		# else:
 		# 	print >>sys.stderr, "UNKNOWN MESSAGE: %s" % msg.__dict__
 
@@ -50,8 +50,6 @@ class MUCBotClient(muc.MUCClient):
 		self.room = room
 		self.nick = nick
 		self.room_jid = jid.internJID(self.room+'@'+self.server+'/'+self.nick)
-		self.last = {}
-		self.activity = None
 	
 	@defer.inlineCallbacks
 	def connectionInitialized(self):
@@ -67,8 +65,8 @@ class MUCBotClient(muc.MUCClient):
 		# 	config_result = yield self.configure(self.room_jid.userhost())
 	
 	def groupChatReceived(self, msg):
-		msg = msg.toElement()
-		if msg["type"] == 'groupchat' and hasattr(msg, "body"):
+		e = msg.toElement()
+		if e["type"] == 'groupchat' and hasattr(e, "body"):
 			print >>sys.stderr, str(msg.__dict__)
 			plugin('heard', self, msg)
 		# else:
