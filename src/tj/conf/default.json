@@ -3,7 +3,7 @@
 	"secret": "oyk:Cz5/Zo>H3M${",
 	"suppress-deprecation-warnings": true,
 	"active-plugins" : [
-		"tj.plugins.tell"
+		"tj.plugins.pugs"
 	],
 	"inactive-plugins" : [
 		"tj.plugins.echo"
